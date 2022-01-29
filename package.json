@@ -1,0 +1,33 @@
+{
+  "name": "rebrand-electra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "node ./src/deployCommands.js",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Konrad570/rebrand-electra.git"
+  },
+  "author": "Koni & Kenshin13",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Konrad570/rebrand-electra/issues"
+  },
+  "homepage": "https://github.com/Konrad570/rebrand-electra#readme",
+  "dependencies": {
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "ascii-table": "^0.0.9",
+    "colors": "^1.4.0",
+    "discord-api-types": "^0.23.1",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "fs": "^0.0.1-security",
+    "mongoose": "^6.0.5",
+    "nodemon": "^2.0.12",
+    "path": "^0.12.7"
+  }
+}
