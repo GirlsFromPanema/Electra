@@ -25,9 +25,16 @@ module.exports.run = async (oldPresence, newPresence) =>
         if (oldPresence.status == newPresence.status)
             return;
 
+
+        // find the guild in the database
         const guildQuery = await Guild.findOne({ id: oldPresence.guild.id });
         if (guildQuery)
         {
+            // check if the bot is a bot we need to watch
+            let checker = (await guildQuery.populate("bots")).bots.find(b => b.id == oldPresence.user.id);
+            if(!checker) return;
+
+
             /* Bot went online. */
             if (newPresence.status == PresenceUpdateStatus.Online)
             {
