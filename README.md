@@ -10,8 +10,8 @@ Nothing can go wrong with someone like Electra, what are you waiting for?
   
 ## Get Started
 ```
-git clone https://github.com/vKxni/ElectraV3
-cd ElectraV3
+git clone https://github.com/GirlsFromPanema/Electra
+cd Electra
 $ npm install
 $ npm start
 ```
