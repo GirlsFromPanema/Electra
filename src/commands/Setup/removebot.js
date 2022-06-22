@@ -42,7 +42,7 @@ module.exports.run = async (interaction, utils) =>
 
 
         /* Update Guild (Entferne Referenz des Bots in dem bots array) */
-        await guildQuery.update({
+        await guildQuery.updateOne({
             $pull: { bots: botQuery._id }
         });
         await guildQuery.save();
@@ -57,7 +57,12 @@ module.exports.run = async (interaction, utils) =>
         }
         else
         {
-            await botQuery.update({
+            /*
+            The $pull operator removes from an existing array all instances of a value or values that match a specified condition. 
+            The $pull operator has the form: { $pull: { <field1>: <value|condition>, <field2>: <value|condition>, ... } } 
+            To specify a <field> in an embedded document or in an array, use dot notation.
+            */
+            await botQuery.updateOne({
                 $pull: { guilds: guildQuery._id }
             });
         }
