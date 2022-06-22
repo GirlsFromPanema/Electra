@@ -50,7 +50,7 @@ module.exports.run = async (interaction, utils) =>
             await botQuery.save();
             await guildQuery.save();
 
-            await interaction.editReply({ content: `Successfully added ${bot} to the watchlist.\nMessage from Developer: hey, there might be a bug with the slash commands that the bot is tracking ALL bots in the guild. sorry for that :(`, ephemeral: true });
+            await interaction.editReply({ content: `Successfully added ${bot} to the watchlist.`, ephemeral: true });
         }
         else await interaction.editReply({ content: "You need to setup your Guild first before you can add a bot to the watchlist.", ephemeral: true });
     }
