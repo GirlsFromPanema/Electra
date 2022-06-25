@@ -48,7 +48,9 @@ module.exports.run = async (interaction, utils) => {
       .setDescription("Choose the Category you'd like to select")
       .setColor("GREEN");
 
-    let sendmsg = await interaction.channel.send({
+    interaction.reply({ content: "Sent!", ephemeral: true });
+
+    await interaction.channel.send({
       content: "  ",
       ephemeral: true,
       embeds: [embed],
@@ -58,9 +60,8 @@ module.exports.run = async (interaction, utils) => {
     let embed1 = new MessageEmbed()
       .setTitle("♻️ | Tracking")
       .setDescription(`
-          - \`setup\`       - Setup Electra
-          - \`addbot\`      - Add Bots to the Watchlist
-          - \`removebot\`   - Remove Bots from the Watchlist
+          - \`managesetup <setup/reset>\` - Manage the Setup Electra
+          - \`managebots <add/remove>\`- Add/Remove Bots to the Watchlist
           - \`list\`        - List all added Bots`)
       .setColor("GREEN");
 

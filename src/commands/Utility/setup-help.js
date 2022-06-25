@@ -1,7 +1,7 @@
 "use strict";
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
+const { CommandInteraction, Permissions, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */
@@ -17,11 +17,19 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
+        const row = new MessageActionRow().addComponents(
+            new MessageButton()
+              .setStyle("LINK")
+              .setEmoji("🗳️")
+              .setLabel("Vote Electra")
+              .setURL(`https://top.gg/en/bot/841978658373894174`)
+          );
+
         const embed = new MessageEmbed()
         .setTitle("Setup Help")
-        .setDescription(`Electra Setup works like this:\n\n1.) **/setup** -> will Setup Channel + Role for your Server\n2.) **/add-bot + bot** -> will add the Bots to the Watchlist\n\n✅ Aaaaand you are done! Electra will now notify you once a bot goes offline, or online!\n\n⚠️You might have seen, that the bot is sending the tracking status even tho the Bot isn't added. It's a problem with the Slash Commands not registrating information correctly.\n\nThanks for using me!`)
+        .setDescription(`Electra Setup works like this:\n\n1.) **/managesetup <setup>** -> will Setup Channel + Role for your Server\n2.) **/managebots <add> <bot>** -> will add the Bots to the Watchlist\n\n✅ Aaaaand you are done! Electra will now notify you once a bot goes offline, or online!`)
 
-        await interaction.reply({ embeds: [embed], ephemeral: true });
+        await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
         return;
     }
     catch (err)

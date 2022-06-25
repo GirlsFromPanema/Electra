@@ -1,11 +1,17 @@
 "use strict";
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
+const {
+  CommandInteraction,
+  Permissions,
+  MessageEmbed,
+  MessageActionRow,
+  MessageButton,
+} = require("discord.js");
 
 module.exports.cooldown = {
-    length: 10000, /* in ms */
-    users: new Set()
+  length: 10000 /* in ms */,
+  users: new Set(),
 };
 
 /**
@@ -13,25 +19,35 @@ module.exports.cooldown = {
  * @param {CommandInteraction} interaction The Command Interaciton
  * @param {any} utils Additional util
  */
-module.exports.run = async (interaction, utils) =>
-{
-    try
-    {
-        const embed = new MessageEmbed().setTitle("Support Server").setDescription("Click [here](https://discord.gg/yszNJjN4Q9) to join the Support Server!")
-        await interaction.reply({ embeds: [embed], ephemeral: true });
-        return;
-    }
-    catch (err)
-    {
-        return Promise.reject(err);
-    }
+module.exports.run = async (interaction, utils) => {
+  try {
+    const row = new MessageActionRow().addComponents(
+      new MessageButton()
+        .setStyle("LINK")
+        .setEmoji("📙")
+        .setLabel("Support Server")
+        .setURL(`https://discord.gg/63fffVBWT8`)
+    );
+
+    const embed = new MessageEmbed()
+      .setTitle("Support Server")
+      .setDescription("If you need help with Electra, click the button below");
+    await interaction.reply({
+      embeds: [embed],
+      components: [row],
+      ephemeral: true,
+    });
+    return;
+  } catch (err) {
+    return Promise.reject(err);
+  }
 };
 
 module.exports.permissions = {
-    clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
-    userPermissions: [Permissions.FLAGS.SEND_MESSAGES]
+  clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
+  userPermissions: [Permissions.FLAGS.SEND_MESSAGES],
 };
 
 module.exports.data = new SlashCommandBuilder()
-    .setName("support")
-    .setDescription("Support Server");
+  .setName("support")
+  .setDescription("Support Server");

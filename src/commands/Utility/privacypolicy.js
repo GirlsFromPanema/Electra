@@ -24,13 +24,13 @@ module.exports.run = async (interaction, utils) =>
       )
       .setDescription(`
       **What data do we store and why do we need it?**
-      We only store Bot IDs from selfmade Bots on Discord. It's necessary because Electra is checking the Bots presence 24/7.
+      We collect the Guild ID, the bot - role and channel IDs for the presence tracking.
       
       **Where do we store the data and who has access to it?**
-      We use MongoDB to store Bot IDs & Server IDs only the Developer Team is able to see these Informations.
+      We use are powerful and secure Database to save your data for our service.
       
       **Can I delete my data? What should I do if I have any concerns.**
-      Of course, remove all of your connected Bots and remove the Bot from your Server will delete all saved Informations
+      You can reset/delete all of your data by running the <option>/reset command.
       
       **Contact informations**
       Discord : Support Server / Email : blacktipemodding@gmail.com`)
