@@ -7,9 +7,13 @@ const path = require('path');
 
 
 module.exports.cooldown = {
-    length: 0, /* in ms */
+    length: 10000, /* in ms */
     users: new Set()
 };
+
+module.exports.ownerOnly = {
+    ownerOnly: true
+}
 
 /**
  * Reloads a certain command.
