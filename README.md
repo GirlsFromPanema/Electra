@@ -9,4 +9,5 @@
 
 **INFORMATION:**
   
-  Electra is being rewritten/updated to the latest version, please be patient. 
+  Electra is being rewritten/updated to the latest version, please be patient as this might take some time.
+  You can still use Electra [here](https://top.gg/en/bot/841978658373894174)
