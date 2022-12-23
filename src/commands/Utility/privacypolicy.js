@@ -23,18 +23,9 @@ module.exports.run = async (interaction, utils) => {
       .setTitle("Privacy Policy")
       .setFooter({ text: "Electra Development" })
       .setDescription(
-        `
-      **What data do we store and why do we need it?**
-      We collect the Guild ID, the bot - role and channel IDs for the presence tracking.
-      
-      **Where do we store the data and who has access to it?**
-      We use are powerful and secure Database to save your data for our service.
-      
-      **Can I delete my data? What should I do if I have any concerns.**
-      You can reset/delete all of your data by running the <option>/reset command.
-      
-      **Contact informations**
-      Discord : Support Server / Email : blacktipemodding@gmail.com`
+        `Please read our privacy policy [here](https://github.com/GirlsFromPanema/Electra/blob/main/privacy-policy.md)
+        
+        Info: You can simply delete your data by using the \`/delete\` option on the setup command.`
       )
       .setTimestamp()
       .setColor("BLURPLE");
