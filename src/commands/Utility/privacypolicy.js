@@ -28,7 +28,7 @@ module.exports.run = async (interaction, utils) => {
         Info: You can simply delete your data by using the \`/delete\` option on the setup command.`
       )
       .setTimestamp()
-      .setColor("BLURPLE");
+      .setColor("Blurple");
 
     await interaction.reply({ embeds: [privacyembed], ephemeral: true });
     return;
