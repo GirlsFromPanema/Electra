@@ -55,8 +55,29 @@ module.exports.run = async (interaction) => {
       const guild = await interaction.client.guilds.fetch(guildID);
       if (!guild) return interaction.followUp({ content: "Guild not found." });
 
+      const guildQuery = await guildSchema.findOne({ guildID: guild.id });
+      if (!guildQuery) {
+        const newGuild = new guildSchema({
+          guildID: guild.id,
+        });
+        await newGuild.save();
+
+        try {
+          await guild.leave();
+        } catch (error) {
+          console.log(error);
+        }
+
+        return interaction.followUp({
+          content: `Successfully blacklisted guild ${guild.name} (${guild.id})`,
+          ephemeral: true,
+        });
+      }
+
+      await guildSchema.findOneAndDelete({ guildID: guild.id });
+
       interaction.followUp({
-        content: `Successfully blacklisted guild ${guild.name} (${guild.id})`,
+        content: `Successfully whitelisted guild ${guild.name} (${guild.id})`,
         ephemeral: true,
       });
     }
