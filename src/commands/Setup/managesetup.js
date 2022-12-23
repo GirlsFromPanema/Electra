@@ -47,7 +47,7 @@ module.exports.run = async (interaction, utils) => {
 
   const reset = new EmbedBuilder()
     .setDescription(
-      `Successfully removed the guild setup.\n\nSad to see you go, u can setup me again any time running \`/managesetup <setup>\``
+      `Successfully removed the guild setup.\n\nSad to see you go, you can setup me again any time running \`/managesetup <setup>\``
     )
     .setColor("Green");
 
