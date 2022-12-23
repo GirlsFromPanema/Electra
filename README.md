@@ -9,8 +9,7 @@
 
 **INFORMATION:**
   
-  Electra is being rewritten/updated to the latest version, please be patient as this might take some time.
-  You can still use Electra [here](https://top.gg/en/bot/841978658373894174)
+  Electra is back and got updated to the latest APi version, vote for us [here](https://top.gg/en/bot/841978658373894174)
   
 ## Terms and Conditions
 Last updated: July 02, 2022
