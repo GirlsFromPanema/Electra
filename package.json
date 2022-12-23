@@ -10,7 +10,6 @@
   },
   "author": "vKxni",
   "license": "ISC",
-  "homepage": "https://github.com/Konrad570/rebrand-electra#readme",
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
     "ascii-table": "^0.0.9",
