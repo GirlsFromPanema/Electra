@@ -1,7 +1,10 @@
 "use strict";
 
-const { SlashCommandBuilder } = require("discord.js");
-const { CommandInteraction, PermissionsBitField } = require("discord.js");
+const {
+  CommandInteraction,
+  PermissionsBitField,
+  SlashCommandBuilder,
+} = require("discord.js");
 const { getAllFiles } = require("../../util/util.js");
 const path = require("path");
 
