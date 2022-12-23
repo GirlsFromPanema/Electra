@@ -1,9 +1,10 @@
 "use strict";
 
 const { PresenceUpdateStatus } = require("discord-api-types/v9");
-const { Presence, MessageActionRow, MessageButton } = require("discord.js");
+const { Presence } = require("discord.js");
+
+// Database query
 const Guild = require("../models/guilds.js");
-const { red } = require("colors/safe");
 
 module.exports.data = {
   name: "presenceUpdate",
@@ -20,14 +21,6 @@ module.exports.run = async (oldPresence, newPresence) => {
   try {
     if (!oldPresence || !oldPresence.user.bot) return;
     if (oldPresence.status == newPresence.status) return;
-
-    const row = new MessageActionRow().addComponents(
-      new MessageButton()
-        .setStyle("LINK")
-        .setEmoji("🗳️")
-        .setLabel("Vote Electra")
-        .setURL(`https://top.gg/en/bot/841978658373894174`)
-    );
 
     // find the guild in the database
     const guildQuery = await Guild.findOne({ id: oldPresence.guild.id });
@@ -53,11 +46,9 @@ module.exports.run = async (oldPresence, newPresence) => {
               timestamp: new Date(),
             },
           ],
-          components: [row]
         });
       } else if (
-
-      /* Bot went offline. */
+        /* Bot went offline. */
         newPresence.status == PresenceUpdateStatus.Offline ||
         newPresence.status == PresenceUpdateStatus.Invisible
       ) {
@@ -74,7 +65,6 @@ module.exports.run = async (oldPresence, newPresence) => {
               timestamp: new Date(),
             },
           ],
-          components: [row]
         });
       }
     }
