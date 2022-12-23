@@ -3,10 +3,11 @@
 const {
   SlashCommandBuilder,
   CommandInteraction,
-  MessageEmbed,
+  EmbedBuilder,
   PermissionsBitField,
-  MessageActionRow,
-  MessageButton,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
 } = require("discord.js");
 
 // Database queries
@@ -36,37 +37,37 @@ module.exports.run = async (interaction) => {
   const bot = interaction.options.getUser("bot");
 
   // embeds
-  const success = new MessageEmbed()
+  const success = new EmbedBuilder()
     .setDescription(`Successfully added ${bot} to the watchlist`)
     .setColor("Green");
 
-  const removed = new MessageEmbed()
+  const removed = new EmbedBuilder()
     .setDescription(`Successfully removed ${bot} from the watchlist`)
     .setColor("Green");
 
-  const error = new MessageEmbed()
+  const error = new EmbedBuilder()
     .setDescription(
       `You need to setup your Guild first before you can execute this command.`
     )
     .setColor("Red");
 
-  const notAbot = new MessageEmbed()
+  const notAbot = new EmbedBuilder()
     .setDescription(`You did not provide an actual Bot!`)
     .setColor("Red");
 
-  const notAddedYet = new MessageEmbed()
+  const notAddedYet = new EmbedBuilder()
     .setDescription(
       `${bot} isn't on the watchlist yet, therefore I can't remove it.`
     )
     .setColor("Red");
 
-  const alreadyAddedEmbed = new MessageEmbed()
+  const alreadyAddedEmbed = new EmbedBuilder()
     .setDescription(`${bot} has already been added to the guilds watchlist`)
     .setColor("Red");
 
-  const row = new MessageActionRow().addComponents(
-    new MessageButton()
-      .setStyle("LINK")
+  const row = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setStyle(ButtonStyle.Link)
       .setEmoji("🗳️")
       .setLabel("Vote Electra")
       .setURL(`https://top.gg/en/bot/841978658373894174`)

@@ -7,6 +7,7 @@ const {
   ButtonBuilder,
   EmbedBuilder,
   ButtonStyle,
+  ChannelType,
 } = require("discord.js");
 
 // Database query
@@ -75,7 +76,7 @@ module.exports.run = async (interaction, utils) => {
   try {
     if (sub === "setup") {
       if (!isSetup) {
-        if (channel.type != "GUILD_TEXT") {
+        if (channel.type != ChannelType.GuildText) {
           interaction.followUp({
             embeds: [notAChannel],
             components: [row],
