@@ -1,7 +1,13 @@
 "use strict";
 
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, MessageEmbed, Permissions, MessageActionRow, MessageButton } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const {
+  CommandInteraction,
+  MessageEmbed,
+  PermissionsBitField,
+  MessageActionRow,
+  MessageButton,
+} = require("discord.js");
 
 // Database queries
 const Guild = require("../../models/guilds");
@@ -58,13 +64,13 @@ module.exports.run = async (interaction) => {
     .setDescription(`${bot} has already been added to the guilds watchlist`)
     .setColor("RED");
 
-    const row = new MessageActionRow().addComponents(
-        new MessageButton()
-          .setStyle("LINK")
-          .setEmoji("🗳️")
-          .setLabel("Vote Electra")
-          .setURL(`https://top.gg/en/bot/841978658373894174`)
-      );
+  const row = new MessageActionRow().addComponents(
+    new MessageButton()
+      .setStyle("LINK")
+      .setEmoji("🗳️")
+      .setLabel("Vote Electra")
+      .setURL(`https://top.gg/en/bot/841978658373894174`)
+  );
 
   if (sub === "add") {
     if (guildQuery) {
@@ -122,10 +128,11 @@ module.exports.run = async (interaction) => {
 
     const botQuery = await Bot.findOne({ id: bot.id });
     if (!botQuery)
-      return interaction.followUp({ 
-        embeds: [notAddedYet], 
+      return interaction.followUp({
+        embeds: [notAddedYet],
         components: [row],
-        ephemeral: true });
+        ephemeral: true,
+      });
 
     const guildQuery2 = await Guild.findOne({
       id: interaction.guildId,
@@ -166,12 +173,12 @@ module.exports.run = async (interaction) => {
       components: [row],
       ephemeral: true,
     });
-  } 
+  }
 };
 
 module.exports.permissions = {
-  clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
-  userPermissions: [Permissions.FLAGS.ADMINISTRATOR],
+  clientPermissions: [PermissionsBitField.Flags.SendMessages],
+  userPermissions: [PermissionsBitField.Flags.Administrator],
 };
 
 module.exports.data = new SlashCommandBuilder()
@@ -199,4 +206,3 @@ module.exports.data = new SlashCommandBuilder()
           .setRequired(true)
       )
   );
-  

@@ -1,6 +1,12 @@
 "use strict";
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, Permissions, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
+const {
+  CommandInteraction,
+  PermissionsBitField,
+  MessageEmbed,
+  MessageActionRow,
+  MessageButton,
+} = require("discord.js");
 
 // Database query
 const Guild = require("../../models/guilds.js");
@@ -25,31 +31,37 @@ module.exports.run = async (interaction, utils) => {
   // Command options
   const role = interaction.options.getRole("role");
   const channel = interaction.options.getChannel("channel");
-  
+
   // embeds
   const success = new MessageEmbed()
-  .setDescription(`Successfully setup the guild.`)
-  .setColor("GREEN")
+    .setDescription(`Successfully setup the guild.`)
+    .setColor("GREEN");
 
   const change = new MessageEmbed()
-  .setDescription(`Successfully updated guild setup.\n\nRole: ${role}\nChannel: ${channel}`)
-  .setColor("GREEN")
+    .setDescription(
+      `Successfully updated guild setup.\n\nRole: ${role}\nChannel: ${channel}`
+    )
+    .setColor("GREEN");
 
   const reset = new MessageEmbed()
-  .setDescription(`Successfully removed the guild setup.\n\nSad to see you go, u can setup me again any time running \`/managesetup <setup>\``)
-  .setColor("GREEN")
+    .setDescription(
+      `Successfully removed the guild setup.\n\nSad to see you go, u can setup me again any time running \`/managesetup <setup>\``
+    )
+    .setColor("GREEN");
 
   const resetError = new MessageEmbed()
-  .setDescription(`**${interaction.guild.name}** has no setup done yet, I can't remove anything here.`)
-  .setColor("RED")
+    .setDescription(
+      `**${interaction.guild.name}** has no setup done yet, I can't remove anything here.`
+    )
+    .setColor("RED");
 
   const notAChannel = new MessageEmbed()
-  .setDescription(`Expected a valid **text** channel.`)
-  .setColor("RED");
+    .setDescription(`Expected a valid **text** channel.`)
+    .setColor("RED");
 
   const notARole = new MessageEmbed()
-  .setDescription(`This is not a valid role.`)
-  .setColor("RED");
+    .setDescription(`This is not a valid role.`)
+    .setColor("RED");
 
   const row = new MessageActionRow().addComponents(
     new MessageButton()
@@ -58,7 +70,7 @@ module.exports.run = async (interaction, utils) => {
       .setLabel("Vote Electra")
       .setURL(`https://top.gg/en/bot/841978658373894174`)
   );
-  
+
   try {
     if (sub === "setup") {
       if (!isSetup) {
@@ -122,8 +134,8 @@ module.exports.run = async (interaction, utils) => {
 };
 
 module.exports.permissions = {
-  clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
-  userPermissions: [Permissions.FLAGS.ADMINISTRATOR],
+  clientPermissions: [PermissionsBitField.Flags.SendMessages],
+  userPermissions: [PermissionsBitField.Flags.Administrator],
 };
 
 module.exports.data = new SlashCommandBuilder()
@@ -144,7 +156,9 @@ module.exports.data = new SlashCommandBuilder()
       .addChannelOption((option) =>
         option
           .setName("channel")
-          .setDescription("The channel you wish to be notified in about bot status updates.")
+          .setDescription(
+            "The channel you wish to be notified in about bot status updates."
+          )
           .setRequired(true)
       )
   )

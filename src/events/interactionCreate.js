@@ -1,6 +1,6 @@
 "use strict";
 
-const { Permissions, CommandInteraction } = require("discord.js");
+const { PermissionsBitField, CommandInteraction } = require("discord.js");
 const { getKeyByValue, msToMinAndSec } = require("../util/util.js");
 const { red } = require("colors/safe");
 
@@ -63,8 +63,8 @@ module.exports.run = async (interaction) => {
 
     /* Check if the client is missing any permissions. */
     cmdFile.permissions.clientPermissions.forEach((flag) => {
-      if (!interaction.guild.me.permissions.has(flag))
-        missingClientPermissions.push(getKeyByValue(Permissions.FLAGS, flag));
+      if (!interaction.guild.members.me.permissions.has(flag))
+        missingClientPermissions.push(getKeyByValue(PermissionsBitField.Flags, flag));
     });
 
     /* If the client is missing any permissions, don't run the command. */
@@ -87,7 +87,7 @@ module.exports.run = async (interaction) => {
       cmdFile.run(interaction).catch((err) => console.error(red(err)));
       /* Don't add a cooldown for admins. TODO: Remove for production!! */
       if (
-        !interaction.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)
+        !interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)
       ) {
         /* Add command cooldown */
         cmdFile.cooldown.users.add(interaction.member.id);

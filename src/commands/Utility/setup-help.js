@@ -1,7 +1,7 @@
 "use strict";
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, Permissions, MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+const { CommandInteraction, PermissionsBitField, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 module.exports.cooldown = {
     length: 10000, /* in ms */
@@ -17,15 +17,15 @@ module.exports.run = async (interaction, utils) =>
 {
     try
     {
-        const row = new MessageActionRow().addComponents(
-            new MessageButton()
-              .setStyle("LINK")
+        const row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setStyle(ButtonStyle.Link)
               .setEmoji("🗳️")
               .setLabel("Vote Electra")
               .setURL(`https://top.gg/en/bot/841978658373894174`)
           );
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
         .setTitle("Setup Help")
         .setDescription(`Electra Setup works like this:\n\n1.) **/managesetup <setup>** -> will Setup Channel + Role for your Server\n2.) **/managebots <add> <bot>** -> will add the Bots to the Watchlist\n\n✅ Aaaaand you are done! Electra will now notify you once a bot goes offline, or online!`)
 
@@ -39,8 +39,8 @@ module.exports.run = async (interaction, utils) =>
 };
 
 module.exports.permissions = {
-    clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
-    userPermissions: [Permissions.FLAGS.SEND_MESSAGES]
+    clientPermissions: [PermissionsBitField.Flags.SendMessages],
+    userPermissions: [PermissionsBitField.Flags.SendMessages]
 };
 
 module.exports.data = new SlashCommandBuilder()

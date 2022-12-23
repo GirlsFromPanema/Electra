@@ -1,7 +1,6 @@
 "use strict";
 
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, Permissions, MessageEmbed } = require("discord.js");
+const { CommandInteraction, SlashCommandBuilder, PermissionsBitField, MessageEmbed } = require("discord.js");
 const Guild = require("../../models/guilds.js");
 const Bot = require("../../models/bots.js");
 const bot = require("../../models/bots.js");
@@ -18,11 +17,10 @@ module.exports.cooldown = {
  */
 module.exports.run = async (interaction, utils) => {
   try {
-
     /* Check if guild is setup. */
     const guildQuery = await Guild.find({ id: interaction.guildId });
 
-    if (!guildQuery?.length){
+    if (!guildQuery?.length) {
       return interaction.reply({
         content: "This Guild has no Setup done.\n=> No Bots",
         ephemeral: true,
@@ -43,15 +41,15 @@ module.exports.run = async (interaction, utils) => {
         .map((bot) => {
           return [`Bot: <@${bot.id}>`].join("\n");
         })
-        .join("\n")
+        .join("\n");
 
       const embed = new MessageEmbed()
         .setTitle(`${interaction.guild.name}'s Bots`)
         .setDescription(allbots)
         .setColor("RED")
         .setTimestamp();
-        
-      interaction.reply({ embeds: [embed] , ephemeral: true});
+
+      interaction.reply({ embeds: [embed], ephemeral: true });
     }
   } catch (err) {
     return Promise.reject(err);
@@ -59,8 +57,8 @@ module.exports.run = async (interaction, utils) => {
 };
 
 module.exports.permissions = {
-  clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
-  userPermissions: [Permissions.FLAGS.ADMINISTRATOR],
+  clientPermissions: [PermissionsBitField.Flags.SendMessages],
+  userPermissions: [PermissionsBitField.Flags.Administrator],
 };
 
 module.exports.data = new SlashCommandBuilder()

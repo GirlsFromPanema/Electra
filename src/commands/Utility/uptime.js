@@ -1,7 +1,7 @@
 "use strict";
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { CommandInteraction, Permissions } = require("discord.js");
+const { CommandInteraction, PermissionsBitField } = require("discord.js");
 const { msToTimeObj, colorPalette } = require("../../util/util.js");
 
 module.exports.cooldown = {
@@ -44,8 +44,8 @@ module.exports.run = async (interaction, utils) =>
 };
 
 module.exports.permissions = {
-    clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
-    userPermissions: [Permissions.FLAGS.SEND_MESSAGES]
+    clientPermissions: [PermissionsBitField.Flags.SendMessages],
+    userPermissions: [PermissionsBitField.Flags.SendMessages]
 };
 
 module.exports.data = new SlashCommandBuilder()

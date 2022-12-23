@@ -3,10 +3,9 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {
   CommandInteraction,
-  Permissions,
-  MessageEmbed,
-  MessageActionRow,
-  MessageButton,
+  PermissionsBitField,
+  EmbedBuilder,
+  ActionRowBuilder,
 } = require("discord.js");
 
 module.exports.cooldown = {
@@ -21,15 +20,15 @@ module.exports.cooldown = {
  */
 module.exports.run = async (interaction, utils) => {
   try {
-    const row = new MessageActionRow().addComponents(
-      new MessageButton()
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
         .setStyle("LINK")
         .setEmoji("📙")
         .setLabel("Support Server")
         .setURL(`https://discord.gg/63fffVBWT8`)
     );
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle("Support Server")
       .setDescription("If you need help with Electra, click the button below");
     await interaction.reply({
@@ -44,8 +43,8 @@ module.exports.run = async (interaction, utils) => {
 };
 
 module.exports.permissions = {
-  clientPermissions: [Permissions.FLAGS.SEND_MESSAGES],
-  userPermissions: [Permissions.FLAGS.SEND_MESSAGES],
+  clientPermissions: [PermissionsBitField.Flags.SendMessages],
+  userPermissions: [PermissionsBitField.Flags.SendMessages],
 };
 
 module.exports.data = new SlashCommandBuilder()
