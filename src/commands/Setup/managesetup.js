@@ -3,9 +3,10 @@ const {
   SlashCommandBuilder,
   CommandInteraction,
   PermissionsBitField,
-  MessageEmbed,
-  MessageActionRow,
-  MessageButton,
+  ActionRowBuilder,
+  ButtonBuilder,
+  EmbedBuilder,
+  ButtonStyle,
 } = require("discord.js");
 
 // Database query
@@ -33,39 +34,39 @@ module.exports.run = async (interaction, utils) => {
   const channel = interaction.options.getChannel("channel");
 
   // embeds
-  const success = new MessageEmbed()
+  const success = new EmbedBuilder()
     .setDescription(`Successfully setup the guild.`)
-    .setColor("GREEN");
+    .setColor("Green");
 
-  const change = new MessageEmbed()
+  const change = new EmbedBuilder()
     .setDescription(
       `Successfully updated guild setup.\n\nRole: ${role}\nChannel: ${channel}`
     )
-    .setColor("GREEN");
+    .setColor("Green");
 
-  const reset = new MessageEmbed()
+  const reset = new EmbedBuilder()
     .setDescription(
       `Successfully removed the guild setup.\n\nSad to see you go, u can setup me again any time running \`/managesetup <setup>\``
     )
-    .setColor("GREEN");
+    .setColor("Green");
 
-  const resetError = new MessageEmbed()
+  const resetError = new EmbedBuilder()
     .setDescription(
       `**${interaction.guild.name}** has no setup done yet, I can't remove anything here.`
     )
-    .setColor("RED");
+    .setColor("Red");
 
-  const notAChannel = new MessageEmbed()
+  const notAChannel = new EmbedBuilder()
     .setDescription(`Expected a valid **text** channel.`)
-    .setColor("RED");
+    .setColor("Red");
 
-  const notARole = new MessageEmbed()
+  const notARole = new EmbedBuilder()
     .setDescription(`This is not a valid role.`)
-    .setColor("RED");
+    .setColor("Red");
 
-  const row = new MessageActionRow().addComponents(
-    new MessageButton()
-      .setStyle("LINK")
+  const row = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setStyle(ButtonStyle.Link)
       .setEmoji("🗳️")
       .setLabel("Vote Electra")
       .setURL(`https://top.gg/en/bot/841978658373894174`)

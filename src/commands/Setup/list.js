@@ -46,7 +46,7 @@ module.exports.run = async (interaction, utils) => {
       const embed = new MessageEmbed()
         .setTitle(`${interaction.guild.name}'s Bots`)
         .setDescription(allbots)
-        .setColor("RED")
+        .setColor("Red")
         .setTimestamp();
 
       interaction.reply({ embeds: [embed], ephemeral: true });

@@ -38,31 +38,31 @@ module.exports.run = async (interaction) => {
   // embeds
   const success = new MessageEmbed()
     .setDescription(`Successfully added ${bot} to the watchlist`)
-    .setColor("GREEN");
+    .setColor("Green");
 
   const removed = new MessageEmbed()
     .setDescription(`Successfully removed ${bot} from the watchlist`)
-    .setColor("GREEN");
+    .setColor("Green");
 
   const error = new MessageEmbed()
     .setDescription(
       `You need to setup your Guild first before you can execute this command.`
     )
-    .setColor("RED");
+    .setColor("Red");
 
   const notAbot = new MessageEmbed()
     .setDescription(`You did not provide an actual Bot!`)
-    .setColor("RED");
+    .setColor("Red");
 
   const notAddedYet = new MessageEmbed()
     .setDescription(
       `${bot} isn't on the watchlist yet, therefore I can't remove it.`
     )
-    .setColor("RED");
+    .setColor("Red");
 
   const alreadyAddedEmbed = new MessageEmbed()
     .setDescription(`${bot} has already been added to the guilds watchlist`)
-    .setColor("RED");
+    .setColor("Red");
 
   const row = new MessageActionRow().addComponents(
     new MessageButton()
