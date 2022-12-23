@@ -1,6 +1,6 @@
 "use strict";
 
-const { CommandInteraction, SlashCommandBuilder, PermissionsBitField, MessageEmbed } = require("discord.js");
+const { CommandInteraction, SlashCommandBuilder, PermissionsBitField, EmbedBuilder } = require("discord.js");
 const Guild = require("../../models/guilds.js");
 const Bot = require("../../models/bots.js");
 const bot = require("../../models/bots.js");
@@ -43,7 +43,7 @@ module.exports.run = async (interaction, utils) => {
         })
         .join("\n");
 
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle(`${interaction.guild.name}'s Bots`)
         .setDescription(allbots)
         .setColor("Red")

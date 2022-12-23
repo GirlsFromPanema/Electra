@@ -20,7 +20,7 @@ module.exports.data = {
 module.exports.run = async (oldPresence, newPresence) => {
   try {
     if (!oldPresence || !oldPresence.user.bot) return;
-    if (oldPresence.status == newPresence.status) return;
+    if (oldPresence.status === newPresence.status) return;
 
     // find the guild in the database
     const guildQuery = await Guild.findOne({ id: oldPresence.guild.id });
@@ -32,7 +32,7 @@ module.exports.run = async (oldPresence, newPresence) => {
       if (!checker) return;
 
       /* Bot went online. */
-      if (newPresence.status == PresenceUpdateStatus.Online) {
+      if (newPresence.status === PresenceUpdateStatus.Online) {
         const onlineEmbed = new EmbedBuilder()
           .setTitle("Bot went online!")
           .setDescription(
@@ -48,10 +48,12 @@ module.exports.run = async (oldPresence, newPresence) => {
           content: `<@&${guildQuery.role}>`,
           embeds: [onlineEmbed],
         });
-      } else if (
+      }
+
+      if (
         /* Bot went offline. */
-        newPresence.status == PresenceUpdateStatus.Offline ||
-        newPresence.status == PresenceUpdateStatus.Invisible
+        newPresence.status === PresenceUpdateStatus.Offline ||
+        newPresence.status === PresenceUpdateStatus.Invisible
       ) {
         const offlineEmbed = new EmbedBuilder()
           .setTitle("Bot went offline!")
