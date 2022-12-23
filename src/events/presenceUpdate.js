@@ -1,7 +1,7 @@
 "use strict";
 
 const { PresenceUpdateStatus } = require("discord-api-types/v9");
-const { Presence } = require("discord.js");
+const { Presence, EmbedBuilder } = require("discord.js");
 
 // Database query
 const Guild = require("../models/guilds.js");
@@ -33,38 +33,39 @@ module.exports.run = async (oldPresence, newPresence) => {
 
       /* Bot went online. */
       if (newPresence.status == PresenceUpdateStatus.Online) {
+        const onlineEmbed = new EmbedBuilder()
+          .setTitle("Bot went online!")
+          .setDescription(
+            `Looks like ${newPresence.member.displayName} (${newPresence.user.tag}) just went online!`
+          )
+          .setColor("Green")
+          .setThumbnail(
+            newPresence.user.avatarURL({ format: "png", size: 1024 })
+          )
+          .setTimestamp(new Date());
+
         newPresence.guild.channels.cache.get(guildQuery.channel)?.send({
           content: `<@&${guildQuery.role}>`,
-          embeds: [
-            {
-              title: "Bot went online!",
-              description: `Looks like ${newPresence.member.displayName} (${newPresence.user.tag}) just went online!`,
-              color: "GREEN",
-              thumbnail: {
-                url: newPresence.user.avatarURL({ format: "png", size: 1024 }),
-              },
-              timestamp: new Date(),
-            },
-          ],
+          embeds: [onlineEmbed],
         });
       } else if (
         /* Bot went offline. */
         newPresence.status == PresenceUpdateStatus.Offline ||
         newPresence.status == PresenceUpdateStatus.Invisible
       ) {
+        const offlineEmbed = new EmbedBuilder()
+          .setTitle("Bot went offline!")
+          .setDescription(
+            `Looks like ${newPresence.member.displayName} (${newPresence.user.tag}) just went offline!`
+          )
+          .setColor("Red")
+          .setThumbnail(
+            newPresence.user.avatarURL({ format: "png", size: 1024 })
+          )
+          .setTimestamp(new Date());
         newPresence.guild.channels.cache.get(guildQuery.channel)?.send({
           content: `<@&${guildQuery.role}>`,
-          embeds: [
-            {
-              title: "Bot went offline!",
-              description: `Looks like ${newPresence.member.displayName} (${newPresence.user.tag}) just went offline!`,
-              color: "RED",
-              thumbnail: {
-                url: newPresence.user.avatarURL({ format: "png", size: 1024 }),
-              },
-              timestamp: new Date(),
-            },
-          ],
+          embeds: [offlineEmbed],
         });
       }
     }
