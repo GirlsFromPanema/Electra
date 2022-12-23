@@ -6,6 +6,7 @@ const {
   PermissionsBitField,
   EmbedBuilder,
   ActionRowBuilder,
+  ButtonStyle,
 } = require("discord.js");
 
 module.exports.cooldown = {
@@ -22,7 +23,7 @@ module.exports.run = async (interaction, utils) => {
   try {
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setStyle("LINK")
+        .setStyle(ButtonStyle.Link)
         .setEmoji("📙")
         .setLabel("Support Server")
         .setURL(`https://discord.gg/63fffVBWT8`)
